@@ -16,4 +16,4 @@ In my explanation, I covered the following concepts:
 - Application server
 - Database
 
-![](https://docs.google.com/document/d/1sHO9LrBNFRSilYz29JtANgPa3pzg0rpwvV289bmBpWw/edit)
+![](https://www.google.com/url?sa=i&url=https%3A%2F%2Fblog.devgenius.io%2Fhow-the-web-works-ab1130b470f7&psig=AOvVaw2jSU_K3m4R9dYgAZ05RB65&ust=1697479929983000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOCyh9TT-IEDFQAAAAAdAAAAABAE)
