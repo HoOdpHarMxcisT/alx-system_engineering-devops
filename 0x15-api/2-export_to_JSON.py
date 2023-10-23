@@ -1,25 +1,28 @@
-script to export data in the JSON format.
+#!/usr/bin/python3
+"""
+Uses https://jsonplaceholder.typicode.com along with an employee ID to
+return information about the employee's todo list progress
 """
 
 import json
 import requests
 from sys import argv
 
-if __name__ == "__main__":
-    usrId = int(argv[1])
-    todo_api_url = "https://jsonplaceholder.typicode.com/todos"
-    todo_response = requests.get(todo_api_url).json()
-    user_api_url = "https://jsonplaceholder.typicode.com/users/{}".\
-        format(usrId)
-    user_response = requests.get(user_api_url).json()
-    task_list = []
-    for todo in todo_response:
-        list_dict = {}
-        if todo.get("userId") == usrId:
-            list_dict["task"] = todo.get("title")
-            list_dict["completed"] = todo.get("completed")
-            list_dict["username"] = user_response.get("username")
-            task_list.append(list_dict)
-        new_dict = {usrId: task_list}
-    with open("{}.json".format(usrId), mode='w') as file:
-        json.dump(new_dict, file)
+if __name__ == '__main__':
+    userId = argv[1]
+    user = requests.get("https://jsonplaceholder.typicode.com/users/{}".
+                        format(userId), verify=False).json()
+    todo = requests.get("https://jsonplaceholder.typicode.com/todos?userId={}".
+                        format(userId), verify=False).json()
+    username = user.get('username')
+    tasks = []
+    for task in todo:
+        task_dict = {}
+        task_dict["task"] = task.get('title')
+        task_dict["completed"] = task.get('completed')
+        task_dict["username"] = username
+        tasks.append(task_dict)
+    jsonobj = {}
+    jsonobj[userId] = tasks
+    with open("{}.json".format(userId), 'w') as jsonfile:
+        json.dump(jsonobj, jsonfile)
